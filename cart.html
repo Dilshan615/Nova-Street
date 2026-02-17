@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Bag | Nova Street Fashion</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .cart-page-item {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+
+        .cart-page-item:hover {
+            transform: translateY(-5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-item-image {
+            width: 120px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .summary-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Nova Street.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">All Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons d-flex align-items-center">
+                <a href="wishlist.html" class="btn position-relative me-2">
+                    <i class="bi bi-heart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark"
+                        style="font-size: 0.6rem;">0</span>
+                </a>
+                <a href="cart.html" class="btn position-relative me-2">
+                    <i class="bi bi-bag-fill text-danger"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style="font-size: 0.6rem;">0</span>
+                </a>
+                <a href="login.html" class="btn d-none d-md-inline-block p-0 ms-2"><i class="bi bi-person fs-4"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <section class="py-5 mt-5">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold mb-5 text-center">Your Shopping Bag</h1>
+
+            <div class="row g-5">
+                <!-- Cart Items List -->
+                <div class="col-lg-8">
+                    <div id="cartPageList">
+                        <!-- Items will be injected by script.js -->
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-accent-color" role="status"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="summary-card">
+                        <h4 class="fw-bold mb-4">Order Summary</h4>
+                        <div class="d-flex justify-content-between mb-3 text-muted">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 text-muted">
+                            <span>Shipping</span>
+                            <span>FREE</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4 text-muted">
+                            <span>Tax (2%)</span>
+                            <span id="summaryTax">$0.00</span>
+                        </div>
+                        <hr class="mb-4">
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="fw-bold">Total</h5>
+                            <h5 class="fw-bold text-accent-color" id="summaryTotal">$0.00</h5>
+                        </div>
+                        <button class="btn btn-premium w-100 py-3 rounded-pill">Proceed to Checkout</button>
+
+                        <div class="mt-4 text-center">
+                            <p class="small text-muted mb-0"><i class="bi bi-shield-check me-2"></i>Secure Checkout
+                                Guaranteed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p class="text-muted small">&copy; 2026 Nova Street Fashion Global. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

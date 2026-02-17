@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Nova Street Fashion</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Advanced Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-close" id="searchClose"><i class="bi bi-x-lg"></i></div>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" placeholder="Search Nova Street Collections...">
+            </div>
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select>
+                        <option>All Categories</option>
+                        <option>Women's Collection</option>
+                        <option>Men's Collection</option>
+                        <option>Kids World</option>
+                        <option>Accessories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <select>
+                        <option>All Prices</option>
+                        <option>$0 - $50</option>
+                        <option>$50 - $150</option>
+                        <option>$150 - $500</option>
+                        <option>$500+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort By</label>
+                    <select>
+                        <option>Newest First</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Most Popular</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-results-preview">
+                <h6>Quick Suggestions</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Summer Dresses</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Mens Suits</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Kids Jackets</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Luxury Watches</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h5 class="mb-0">Shopping Bag</h5>
+            <button class="btn p-0" id="cartClose"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="drawer-items-container cart-items-container">
+            <!-- Items injected via JS -->
+        </div>
+        <div class="drawer-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalAmount">$0.00</span>
+            </div>
+            <button class="btn btn-premium w-100 py-3">Checkout Now</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div class="wishlist-drawer" id="wishlistDrawer">
+        <div class="drawer-header">
+            <h5 class="mb-0">My Wishlist</h5>
+            <button class="btn p-0" id="wishlistClose"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="drawer-items-container wishlist-items-container">
+            <!-- Wishlist items injected via JS -->
+        </div>
+        <div class="drawer-footer">
+            <button class="btn btn-premium w-100 py-3">Add All to Bag</button>
+        </div>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Nova Street.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">All Products</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#shop">New Arrivals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
+                </ul>
+            </div>
+            <div class="nav-icons d-flex align-items-center">
+                <button class="btn position-relative me-2">
+                    <i class="bi bi-heart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark"
+                        style="font-size: 0.6rem;">0</span>
+                </button>
+                <button class="btn position-relative me-2">
+                    <i class="bi bi-bag"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        style="font-size: 0.6rem;">0</span>
+                </button>
+                <a href="login.html" class="btn d-none d-md-inline-block p-0 ms-2"><i class="bi bi-person fs-4"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-5 mt-5">
+        <div class="container py-5 text-center">
+            <h1 class="display-3 fw-bold mb-4" data-aos="fade-up">Our Journey</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;" data-aos="fade-up" data-aos-delay="100">Since
+                2014, we've been crafting stories through style, blending tradition with modern minimalism.</p>
+        </div>
+    </section>
+
+    <!-- Detailed About Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <img src="assets/img/hero.png" class="img-fluid rounded-4 shadow-lg" alt="Our Craft">
+                </div>
+                <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+                    <h2 class="display-5 mb-4">Philosophy of Excellence</h2>
+                    <p class="text-muted">At Nova Street, we believe that fashion is a form of self-expression that should
+                        never compromise on quality. Our design philosophy centers around "Timeless Over Trendy". We
+                        don't just follow seasons; we create pieces that stay in your wardrobe for a lifetime.</p>
+                    <p class="text-muted">Every fabric is hand-selected, every pattern is meticulously drafted, and
+                        every garment is a result of hours of skilled craftsmanship. We work with local artisans to
+                        ensure that we maintain the highest standards while promoting fair trade.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
+                    <img src="assets/img/blog.png" class="img-fluid rounded-4 shadow-lg" alt="Sustainability">
+                </div>
+                <div class="col-lg-6 pe-lg-5" data-aos="fade-right">
+                    <h2 class="display-5 mb-4">Commitment to Sustainability</h2>
+                    <p class="text-muted">We recognize the impact of the fashion industry on our planet. That's why Nova Street
+                        is committed to a circular fashion model. 80% of our materials are ethically sourced and
+                        biodegradable.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-accent-color me-3"></i>
+                            <span>Zero-waste production packaging</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-accent-color me-3"></i>
+                            <span>Reduced carbon footprint in distribution</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-accent-color me-3"></i>
+                            <span>Annual sustainability audits</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Placeholder / Lifestyle -->
+    <section class="py-5 position-relative overflow-hidden" style="height: 500px;">
+        <img src="assets/img/blog.png" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0 z-n1"
+            style="filter: brightness(0.4);">
+        <div class="container h-100 d-flex flex-column justify-content-center text-center text-white">
+            <h2 class="display-4 fw-bold mb-4" data-aos="zoom-in">Experience the Lifestyle</h2>
+            <p class="lead mb-5" data-aos="zoom-in" data-aos-delay="200">Nova Street isn't just about what you wear, it's about
+                how you feel.</p>
+            <div data-aos="zoom-in" data-aos-delay="400">
+                <button class="btn btn-light rounded-circle shadow-lg" style="width: 80px; height: 80px;">
+                    <i class="bi bi-play-fill h2 text-dark pt-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="footer-logo">Nova Street.</div>
+                    <p class="text-muted mb-4 pe-lg-5">Bringing you the finest in modern fashion. Sustainability and
+                        elegance at the core of everything we do.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links">
+                    <h6>Explore</h6>
+                    <ul>
+                        <li><a href="categories.html">Shop All</a></li>
+                        <li><a href="index.html#shop">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="categories.html">Collections</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links">
+                    <h6>Care</h6>
+                    <ul>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links">
+                    <h6>Company</h6>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links">
+                    <h6>Support</h6>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-5 opacity-10">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-muted">&copy; 2026 Nova Street Fashion Global. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" height="20" class="me-3"
+                        alt="PayPal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" height="15"
+                        class="me-3" alt="Visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="20"
+                        alt="MasterCard">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
