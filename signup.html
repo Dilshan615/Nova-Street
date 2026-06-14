@@ -45,28 +45,28 @@
                 <form class="auth-form mt-4">
                     <div class="row">
                         <div class="col-md-6 mb-1">
-                            <label class="form-label"><i class="bi bi-person me-2"></i>First Name</label>
-                            <input type="text" class="form-control" placeholder="John" required>
+                            <label class="form-label" for="signupFirstName"><i class="bi bi-person me-2"></i>First Name</label>
+                            <input type="text" class="form-control" id="signupFirstName" placeholder="John" required>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" placeholder="Doe" required>
+                            <label class="form-label" for="signupLastName">Last Name</label>
+                            <input type="text" class="form-control" id="signupLastName" placeholder="Doe" required>
                         </div>
                     </div>
 
                     <div class="mb-1">
-                        <label class="form-label"><i class="bi bi-telephone me-2"></i>Contact Number</label>
-                        <input type="tel" class="form-control" placeholder="+94 77 123 4567" required>
+                        <label class="form-label" for="signupContact"><i class="bi bi-telephone me-2"></i>Contact Number</label>
+                        <input type="tel" class="form-control" id="signupContact" placeholder="+94 77 123 4567" required>
                     </div>
 
                     <div class="mb-1">
-                        <label class="form-label"><i class="bi bi-envelope me-2"></i>Email Address</label>
-                        <input type="email" class="form-control" placeholder="john@example.com" required>
+                        <label class="form-label" for="signupEmail"><i class="bi bi-envelope me-2"></i>Email Address</label>
+                        <input type="email" class="form-control" id="signupEmail" placeholder="john@example.com" required>
                     </div>
 
                     <div class="mb-1">
-                        <label class="form-label"><i class="bi bi-gender-ambiguous me-2"></i>Gender</label>
-                        <select class="form-select">
+                        <label class="form-label" for="signupGender"><i class="bi bi-gender-ambiguous me-2"></i>Gender</label>
+                        <select class="form-select" id="signupGender">
                             <option selected disabled>Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -76,12 +76,12 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-1 position-relative">
-                            <label class="form-label"><i class="bi bi-lock me-2"></i>Password</label>
+                            <label class="form-label" for="signupPass"><i class="bi bi-lock me-2"></i>Password</label>
                             <input type="password" class="form-control" id="signupPass" placeholder="••••••••" required>
                             <i class="bi bi-eye password-toggle" onclick="togglePassword('signupPass', this)"></i>
                         </div>
                         <div class="col-md-6 mb-1 position-relative">
-                            <label class="form-label">Re-Password</label>
+                            <label class="form-label" for="signupRePass">Re-Password</label>
                             <input type="password" class="form-control" id="signupRePass" placeholder="••••••••"
                                 required>
                             <i class="bi bi-eye password-toggle" onclick="togglePassword('signupRePass', this)"></i>

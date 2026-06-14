@@ -62,33 +62,126 @@
 
 <body>
 
+    <!-- Advanced Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-close" id="searchClose"><i class="bi bi-x-lg"></i></div>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="overlaySearchInput" placeholder="Search Nova Street Collections...">
+            </div>
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label for="searchCategory">Category</label>
+                    <select id="searchCategory">
+                        <option>All Categories</option>
+                        <option>Women's Collection</option>
+                        <option>Men's Collection</option>
+                        <option>Kids World</option>
+                        <option>Accessories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchPrice">Price Range</label>
+                    <select id="searchPrice">
+                        <option>All Prices</option>
+                        <option>$0 - $50</option>
+                        <option>$50 - $150</option>
+                        <option>$150 - $500</option>
+                        <option>$500+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchSort">Sort By</label>
+                    <select id="searchSort">
+                        <option>Newest First</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Most Popular</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-results-preview">
+                <h6>Quick Suggestions</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Summer Dresses</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Mens Suits</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Kids Jackets</a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Luxury Watches</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h5 class="mb-0">Shopping Bag</h5>
+            <button class="btn p-0" id="cartClose" aria-label="Close cart"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="drawer-items-container cart-items-container">
+            <!-- Items injected via JS -->
+        </div>
+        <div class="drawer-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalAmount">$0.00</span>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="cart.html" class="btn btn-premium-outline w-50 py-3 rounded-pill text-decoration-none text-center">View Bag</a>
+                <button class="btn btn-premium w-50 py-3 rounded-pill">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div class="wishlist-drawer" id="wishlistDrawer">
+        <div class="drawer-header">
+            <h5 class="mb-0">My Wishlist</h5>
+            <button class="btn p-0" id="wishlistClose" aria-label="Close wishlist"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="drawer-items-container wishlist-items-container">
+            <!-- Wishlist items injected via JS -->
+        </div>
+        <div class="drawer-footer">
+            <div class="d-flex gap-2">
+                <a href="wishlist.html" class="btn btn-premium-outline w-50 py-3 rounded-pill text-decoration-none text-center">View List</a>
+                <button class="btn btn-premium w-50 py-3 rounded-pill">Add All to Bag</button>
+            </div>
+        </div>
+    </div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
     <!-- Header / Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="index.html">Nova Street.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html">All Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html" id="nav-home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="categories.html" id="nav-categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html" id="nav-products">All Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html" id="nav-about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact" id="nav-contact">Contact</a></li>
                 </ul>
             </div>
             <div class="nav-icons d-flex align-items-center">
-                <a href="wishlist.html" class="btn position-relative me-2">
-                    <i class="bi bi-heart-fill text-dark"></i>
+                <button class="btn position-relative" id="navSearchBtn" title="Search">
+                    <i class="bi bi-search"></i>
+                </button>
+                <button class="btn position-relative" id="navWishlistBtn" title="Wishlist">
+                    <i class="bi bi-heart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark"
                         style="font-size: 0.6rem;">0</span>
-                </a>
-                <a href="cart.html" class="btn position-relative me-2">
+                </button>
+                <button class="btn position-relative" id="navCartBtn" title="Shopping Bag">
                     <i class="bi bi-bag"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                         style="font-size: 0.6rem;">0</span>
-                </a>
-                <a href="login.html" class="btn d-none d-md-inline-block p-0 ms-2"><i class="bi bi-person fs-4"></i></a>
+                </button>
+                <a href="login.html" class="btn p-0" title="Account"><i class="bi bi-person fs-4"></i></a>
             </div>
         </div>
     </nav>
@@ -96,26 +189,101 @@
     <!-- Page Content -->
     <section class="py-5 mt-5">
         <div class="container py-5">
-            <div class="text-center mb-5">
-                <h1 class="display-3 fw-bold">My Wishlist</h1>
-                <p class="lead text-muted">All your favorite items in one place.</p>
+            <!-- Welcoming Style Board Banner -->
+            <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3" data-aos="fade-up">
+                <div>
+                    <h1 class="display-5 fw-bold mb-0">My Favorites Board</h1>
+                    <p class="text-muted mt-2 mb-0" id="wishlistCountText">Your curated style choices will appear here.</p>
+                </div>
+                <button class="share-board-btn" id="shareWishlistBtn">
+                    <i class="bi bi-share"></i>
+                    <span>Share Style Board</span>
+                </button>
             </div>
 
-            <div id="wishlistPageGrid" class="row g-4">
+            <div id="wishlistPageGrid" class="row g-4" data-aos="fade-up" data-aos-delay="100">
                 <!-- Wishlist items will be injected by script.js -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-accent-color" role="status"></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container text-center">
-            <p class="text-muted small">&copy; 2026 Nova Street Fashion Global. All rights reserved.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up">
+                    <div class="footer-logo">Nova Street.</div>
+                    <p class="text-muted mb-4 pe-lg-5">Bringing you the finest in modern fashion. Sustainability and
+                        elegance at the core of everything we do.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links" data-aos="fade-up" data-aos-delay="100">
+                    <h6>Explore</h6>
+                    <ul>
+                        <li><a href="products.html">Shop All</a></li>
+                        <li><a href="index.html#shop">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="categories.html">Collections</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links" data-aos="fade-up" data-aos-delay="200">
+                    <h6>Care</h6>
+                    <ul>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links" data-aos="fade-up" data-aos-delay="300">
+                    <h6>Company</h6>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-4 footer-links" data-aos="fade-up" data-aos-delay="400">
+                    <h6>Support</h6>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-5 opacity-10" data-aos="fade-in" data-aos-delay="500">
+            <div class="row" data-aos="fade-up" data-aos-delay="600">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-muted">&copy; 2026 Nova Street Fashion Global. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" height="20" class="me-3"
+                        alt="PayPal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" height="15"
+                        class="me-3" alt="Visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="20"
+                        alt="MasterCard">
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
 </body>
