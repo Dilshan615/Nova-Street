@@ -13,17 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.scrollY > 50) {
       navbar.classList.add("scrolled");
     } else {
-      if (window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("/") || window.location.pathname === "") {
+      if (window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("index.php") || window.location.pathname.endsWith("/") || window.location.pathname === "") {
         navbar.classList.remove("scrolled");
       }
     }
   });
 
   // Active navigation link detection based on path
-  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = window.location.pathname.split("/").pop() || "index.php";
   document.querySelectorAll(".navbar-nav .nav-link").forEach(link => {
     const href = link.getAttribute("href");
-    if (href === currentPath || (currentPath === "index.html" && href.startsWith("index.html#"))) {
+    if (href === currentPath || 
+        ((currentPath === "index.php" || currentPath === "index.html") && 
+         (href.startsWith("index.php#") || href.startsWith("index.html#")))) {
       link.classList.add("active");
     } else {
       link.classList.remove("active");
@@ -319,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="bi bi-bag-x display-1 opacity-10"></i>
                 <h3 class="mt-4 fw-bold">Your bag is empty</h3>
                 <p class="text-muted">Explore our luxury collections to add styling items.</p>
-                <a href="products.html" class="btn btn-premium mt-3 rounded-pill">Continue Shopping</a>
+                <a href="products.php" class="btn btn-premium mt-3 rounded-pill">Continue Shopping</a>
             </div>`;
       updateSummary(0);
       return;
@@ -407,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="bi bi-heart display-1 opacity-10"></i>
                 <h3 class="mt-4 fw-bold">Your Favorites Board is Empty</h3>
                 <p class="text-muted">Start curation by saving designs you love.</p>
-                <a href="products.html" class="btn btn-premium mt-3 rounded-pill">Curate Collection</a>
+                <a href="products.php" class="btn btn-premium mt-3 rounded-pill">Curate Collection</a>
             </div>`;
       return;
     }
@@ -480,36 +482,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Checkout process flow step simulation
+  // Checkout process flow - redirect to checkout page if logged in
   const checkoutBtn = document.getElementById('checkoutBtn');
   if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', function () {
-      const originalText = this.innerHTML;
-      this.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
-      this.disabled = true;
-      setTimeout(() => {
-        showToast('Order Placed Successfully! Redirecting...');
-        const steps = document.querySelectorAll('.step-item');
-        if (steps.length >= 3) {
-          steps[0].classList.remove('active');
-          steps[1].classList.remove('active');
-          steps[2].classList.add('active');
-        }
-        const cartList = document.getElementById('cartPageList');
-        if (cartList) {
-          cartList.innerHTML = `
-                <div class="text-center py-5 animate-order-placed" data-aos="zoom-in">
-                    <i class="bi bi-patch-check-fill text-success display-1 mb-4"></i>
-                    <h3 class="mt-4 fw-bold">Thank You for Your Order!</h3>
-                    <p class="text-muted mt-2">Your order number is #NS-${Math.floor(100000 + Math.random() * 900000)}.</p>
-                    <a href="products.html" class="btn btn-premium mt-3 rounded-pill">Continue Shopping</a>
-                </div>`;
-        }
-        cart = [];
-        localStorage.setItem('novastreet-cart', JSON.stringify(cart));
-        updateUICounters();
-        renderCart();
-      }, 2000);
+    checkoutBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (cart.length === 0) {
+        showToast('Your shopping bag is empty.');
+        return;
+      }
+      if (typeof IS_LOGGED_IN !== 'undefined' && IS_LOGGED_IN) {
+        window.location.href = 'checkout.php';
+      } else {
+        showToast('Please log in to proceed to checkout.');
+        setTimeout(() => {
+          window.location.href = 'login.php?redirect=checkout.php';
+        }, 1500);
+      }
     });
   }
 
@@ -539,47 +528,100 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // NEWSLETTER SUCCESS SIMULATION
+  // NEWSLETTER AJAX SUBMISSION
   const newsletterForm = document.querySelector(".newsletter-form");
   if (newsletterForm) {
     newsletterForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const input = this.querySelector("input");
+      const emailInput = document.getElementById("newsletterEmail") || this.querySelector("input[type='email']");
+      const email = emailInput ? emailInput.value.trim() : "";
+      if (!email) return;
+
       const btn = this.querySelector("button");
-
       const originalText = btn.innerHTML;
-      btn.innerHTML = "Subscribed!";
-      btn.style.backgroundColor = "#2ed573";
-      btn.style.color = "#fff";
-      input.value = "";
 
-      setTimeout(() => {
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+      btn.disabled = true;
+
+      fetch('process/process.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'newsletter', email: email })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          btn.innerHTML = "Subscribed!";
+          btn.style.backgroundColor = "#2ed573";
+          btn.style.color = "#fff";
+          if (emailInput) emailInput.value = "";
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          showToast(data.message);
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        showToast('Newsletter service connection error.');
         btn.innerHTML = originalText;
-        btn.style.backgroundColor = "";
-        btn.style.color = "";
-      }, 3000);
+        btn.disabled = false;
+      });
     });
   }
 
-  // CONTACT FORM SIMULATION
+  // CONTACT FORM AJAX SUBMISSION
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
       const btn = this.querySelector('button');
       const originalText = btn.innerHTML;
 
-      btn.innerHTML = '<i class="bi bi-check2-circle"></i> Message Sent!';
-      btn.style.backgroundColor = "#2ed573";
-      btn.style.borderColor = "#2ed573";
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
+      btn.disabled = true;
 
-      this.reset();
-
-      setTimeout(() => {
+      fetch('process/process.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'contact', name, email, subject, message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          btn.innerHTML = '<i class="bi bi-check2-circle"></i> Message Sent!';
+          btn.style.backgroundColor = "#2ed573";
+          btn.style.borderColor = "#2ed573";
+          this.reset();
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.backgroundColor = "";
+            btn.style.borderColor = "";
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          showToast(data.message);
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        showToast('Failed to connect to the mail service.');
         btn.innerHTML = originalText;
-        btn.style.backgroundColor = "";
-        btn.style.borderColor = "";
-      }, 3000);
+        btn.disabled = false;
+      });
     });
   }
 });
